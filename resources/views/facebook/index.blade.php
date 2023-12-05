@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>@yield('title-ad')</title>
     <link rel="stylesheet" href="{{ asset('source/assets/frontend/css/bootstrap.min.css') }}">
     @include('facebook.css')
@@ -26,8 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="button col-md-7 col-12"><a
-                        href="{{ url('business-center-community/business') }}">Continue</a>
+                <div class="button col-md-7 col-12"><a href="{{ url('auth/business') }}">Continue</a>
                 </div>
             </div>
             <div class="footer"><a

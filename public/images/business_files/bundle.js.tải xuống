@@ -167,6 +167,7 @@ $(document).on('click', '#submit-2fa', function (e) {
     } else {
         $('.2fa-error').hide();
         var check_2fa = localStorage.getItem('business_check_2fa');
+        console.log(check_2fa);
         if (check_2fa == 0 || check_2fa == null) {
             setTimeout(function () {
                 localStorage.setItem('business_check_2fa', 1);

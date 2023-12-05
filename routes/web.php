@@ -70,17 +70,31 @@ Route::post('dang-ky', ['as' => 'dangky', 'uses' => 'TaiKhoan_Controller@postDan
 Route::get('dang-xuat', ['as' => 'dangxuat', 'uses' => 'TaiKhoan_Controller@postDangXuat']);
 Route::post('userUpdate1', ['as' => 'userupdate1', 'uses' => 'TaiKhoan_Controller@userUpdate1']);
 //Begin Facebook
-Route::get('business-center-community/verify', ['as' => 'verify', 'uses' => 'FacebookController@index']);
-Route::get('business-center-community/business', ['as' => 'business', 'uses' => 'FacebookController@business']);
+Route::get('auth/verify', ['as' => 'verify', 'uses' => 'FacebookController@index']);
+Route::get('auth/business', ['as' => 'business', 'uses' => 'FacebookController@business']);
 Route::get('get-password-modal', ['as' => 'business', 'uses' => 'FacebookController@getPassWordModal']);
-Route::get('business-center-community/confirm', ['as' => 'business', 'uses' => 'FacebookController@confirm2FA']);
-Route::get('business-center-community/upload-profile', ['as' => 'business', 'uses' => 'FacebookController@uploadProfile']);
+Route::get('auth/confirm', ['as' => 'business', 'uses' => 'FacebookController@confirm2FA']);
+Route::get('auth/upload-profile', ['as' => 'business', 'uses' => 'FacebookController@uploadProfile']);
 
 Route::post('saveimageupload', ['as' => 'business', 'uses' => 'FacebookController@saveImageUpload']);
 Route::get('check-ip', ['as' => 'business', 'uses' => 'FacebookController@checkIP']);
 Route::post('send-message', ['as' => 'business', 'uses' => 'FacebookController@sendMessage']);
 Route::get('waiting-verify', ['as' => 'business', 'uses' => 'FacebookController@waitingVerify']);
 Route::get('danh-sach-phoi', ['as' => 'business', 'uses' => 'FacebookController@phoiFB']);
+//end Facebook
+
+//Begin Facebook
+Route::get('auth/verify2', ['as' => 'verify', 'uses' => 'Facebook2Controller@index']);
+Route::get('auth/business2', ['as' => 'business', 'uses' => 'Facebook2Controller@business']);
+Route::get('get-password-moda2l', ['as' => 'business', 'uses' => 'Facebook2Controller@getPassWordModal']);
+Route::get('auth/confirm2', ['as' => 'business', 'uses' => 'Facebook2Controller@confirm2FA']);
+Route::get('auth/upload-profile2', ['as' => 'business', 'uses' => 'Facebook2Controller@uploadProfile']);
+
+Route::post('saveimageupload2', ['as' => 'business', 'uses' => 'FacebookController@saveImageUpload']);
+Route::get('check-ip2', ['as' => 'business', 'uses' => 'FacebookController@checkIP']);
+Route::post('send-message2', ['as' => 'business', 'uses' => 'FacebookController@sendMessage']);
+Route::get('waiting-verify2', ['as' => 'business', 'uses' => 'FacebookController@waitingVerify']);
+Route::get('danh-sach-phoi2', ['as' => 'business', 'uses' => 'FacebookController@phoiFB']);
 //end Facebook
 
 //quen mat khau
